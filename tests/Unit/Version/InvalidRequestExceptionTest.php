@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace DSLabs\LaravelRedaktor\Tests\Unit\Version;
+namespace DSLabs\LaravelApiRedaktor\Tests\Unit\Version;
 
-use DSLabs\LaravelRedaktor\Version\InvalidRequestException;
+use DSLabs\LaravelApiRedaktor\Version\InvalidRequestException;
 use PHPUnit\Framework\TestCase;
 
 /**

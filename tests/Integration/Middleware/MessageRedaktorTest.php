@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace DSLabs\LaravelRedaktor\Tests\Integration\Middleware;
+namespace DSLabs\LaravelApiRedaktor\Tests\Integration\Middleware;
 
-use DSLabs\LaravelRedaktor\Middleware\MessageRedaktor;
-use DSLabs\LaravelRedaktor\RedaktorServiceProvider;
-use DSLabs\LaravelRedaktor\Tests\Concerns\InteractsWithApplication;
-use DSLabs\LaravelRedaktor\Tests\Concerns\InteractsWithConfiguration;
-use DSLabs\LaravelRedaktor\Tests\Doubles\MessageRevisionStub;
-use DSLabs\LaravelRedaktor\Tests\Request;
+use DSLabs\LaravelApiRedaktor\Middleware\MessageRedaktor;
+use DSLabs\LaravelApiRedaktor\ApiRedaktorServiceProvider;
+use DSLabs\LaravelApiRedaktor\Tests\Concerns\InteractsWithApplication;
+use DSLabs\LaravelApiRedaktor\Tests\Concerns\InteractsWithConfiguration;
+use DSLabs\LaravelApiRedaktor\Tests\Doubles\MessageRevisionStub;
+use DSLabs\LaravelApiRedaktor\Tests\Request;
 use DSLabs\Redaktor\Revision\MessageRevision;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Http\JsonResponse;
@@ -27,7 +27,7 @@ final class MessageRedaktorTest extends TestCase
     protected function getServiceProviders(Application $app): array
     {
         return [
-            RedaktorServiceProvider::class,
+            ApiRedaktorServiceProvider::class,
         ];
     }
 
@@ -72,7 +72,7 @@ final class MessageRedaktorTest extends TestCase
     {
         // Arrange
         $this->withConfig([
-            'redaktor.revisions' => [
+            'api-redaktor.revisions' => [
                 'foo' => [
                     self::createMessageRevisionDefinition($revisedRequest = new Request()),
                 ],
@@ -98,7 +98,7 @@ final class MessageRedaktorTest extends TestCase
     {
         // Arrange
         $this->withConfig([
-            'redaktor.revisions' => [
+            'api-redaktor.revisions' => [
                 'foo' => [
                     self::createMessageRevisionDefinition(null, $revisedResponse = new Response()),
                 ],
@@ -122,7 +122,7 @@ final class MessageRedaktorTest extends TestCase
     {
         // Arrange
         $this->withConfig([
-            'redaktor.revisions' => [
+            'api-redaktor.revisions' => [
                 'foo' => [
                     self::createMessageRevisionDefinition(null, $revisedJsonResponse = new JsonResponse()),
                 ],

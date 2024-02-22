@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace DSLabs\LaravelRedaktor\Tests\Concerns;
+namespace DSLabs\LaravelApiRedaktor\Tests\Concerns;
 
 use Illuminate\Contracts\Console\Kernel as ConsoleKernelContract;
 use Illuminate\Contracts\Foundation\Application;

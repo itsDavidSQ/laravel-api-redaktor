@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace DSLabs\LaravelRedaktor\Department;
+namespace DSLabs\LaravelApiRedaktor\Department;
 
-use DSLabs\LaravelRedaktor\Editor\IlluminateRoutingEditor;
+use DSLabs\LaravelApiRedaktor\Editor\IlluminateRoutingEditor;
 use DSLabs\Redaktor\Department\RoutingDepartment;
 use DSLabs\Redaktor\Editor\Brief;
 use DSLabs\Redaktor\Editor\EditorInterface;

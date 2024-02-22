@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace DSLabs\LaravelRedaktor\Tests\Integration;
+namespace DSLabs\LaravelApiRedaktor\Tests\Integration;
 
-use DSLabs\LaravelRedaktor\RouteTaggingServiceProvider;
-use DSLabs\LaravelRedaktor\Tests\Concerns\InteractsWithApplication;
-use DSLabs\LaravelRedaktor\Tests\Concerns\InteractsWithRouting;
+use DSLabs\LaravelApiRedaktor\RouteTaggingServiceProvider;
+use DSLabs\LaravelApiRedaktor\Tests\Concerns\InteractsWithApplication;
+use DSLabs\LaravelApiRedaktor\Tests\Concerns\InteractsWithRouting;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Routing\Route;
 use Illuminate\Routing\RouteCollection;

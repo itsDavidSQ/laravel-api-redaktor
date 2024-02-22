@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace DSLabs\LaravelRedaktor;
+namespace DSLabs\LaravelApiRedaktor;
 
 use Illuminate\Routing\Route;
 use Illuminate\Routing\RouteCollection;

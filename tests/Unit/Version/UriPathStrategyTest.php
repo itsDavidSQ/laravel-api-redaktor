@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace DSLabs\LaravelRedaktor\Tests\Unit\Version;
+namespace DSLabs\LaravelApiRedaktor\Tests\Unit\Version;
 
-use DSLabs\LaravelRedaktor\Version\InvalidRequestException;
-use DSLabs\LaravelRedaktor\Version\UriPathStrategy;
+use DSLabs\LaravelApiRedaktor\Version\InvalidRequestException;
+use DSLabs\LaravelApiRedaktor\Version\UriPathStrategy;
 use Illuminate\Http\Request;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\Request as SymfonyRequest;

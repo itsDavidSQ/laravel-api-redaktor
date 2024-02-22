@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace DSLabs\LaravelRedaktor\Department;
+namespace DSLabs\LaravelApiRedaktor\Department;
 
 use DSLabs\Redaktor\Editor\EditorInterface;
 

@@ -1,8 +1,8 @@
 <?php
 
-namespace DSLabs\LaravelRedaktor\Version;
+namespace DSLabs\LaravelApiRedaktor\Version;
 
-use DSLabs\LaravelRedaktor\Guard\IlluminateGuard;
+use DSLabs\LaravelApiRedaktor\Guard\IlluminateGuard;
 use DSLabs\Redaktor\Version\Strategy;
 use DSLabs\Redaktor\Version\UnresolvedVersionException;
 use DSLabs\Redaktor\Version\Version;
@@ -32,7 +32,7 @@ class DatabaseStrategy implements Strategy
     private $queryBuilder;
 
     public function __construct(
-        string $table = 'redaktor',
+        string $table = 'api_redaktor',
         string $column = 'version',
         callable $filter = null
     ) {

@@ -1,5 +1,5 @@
 {
-    "name": "ds-labs/laravel-redaktor",
+    "name": "ds-labs/laravel-api-redaktor",
     "description": "Evolve your API while maintaining backwards compatibility.",
     "type": "library",
     "keywords": [
@@ -8,6 +8,7 @@
         "rest",
         "evolution",
         "revision",
+        "redaktør",
         "redaktor",
         "laravel"
     ],
@@ -37,12 +38,12 @@
     },
     "autoload": {
         "psr-4": {
-            "DSLabs\\LaravelRedaktor\\": "src/"
+            "DSLabs\\LaravelApiRedaktor\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "DSLabs\\LaravelRedaktor\\Tests\\": "tests/"
+            "DSLabs\\LaravelApiRedaktor\\Tests\\": "tests/"
         }
     },
     "scripts": {
@@ -54,8 +55,8 @@
     "extra": {
         "laravel": {
             "providers": [
-                "DSLabs\\LaravelRedaktor\\RedaktorServiceProvider",
-                "DSLabs\\LaravelRedaktor\\RouteTaggingServiceProvider"
+                "DSLabs\\LaravelApiRedaktor\\ApiRedaktorServiceProvider",
+                "DSLabs\\LaravelApiRedaktor\\RouteTaggingServiceProvider"
             ]
         }
     },

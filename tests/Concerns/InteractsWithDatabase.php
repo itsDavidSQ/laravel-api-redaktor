@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace DSLabs\LaravelRedaktor\Tests\Concerns;
+namespace DSLabs\LaravelApiRedaktor\Tests\Concerns;
 
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Database\Query\Builder;
@@ -26,7 +26,7 @@ trait InteractsWithDatabase
     private function pinVersion(string $version, string $appId): void
     {
         $this->insertInto(
-            'redaktor',
+            'api_redaktor',
             [
                 'version' => $version,
                 'app_id' => $appId,

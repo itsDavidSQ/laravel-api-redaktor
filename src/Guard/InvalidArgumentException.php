@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace DSLabs\LaravelRedaktor\Guard;
+namespace DSLabs\LaravelApiRedaktor\Guard;
 
 final class InvalidArgumentException extends \InvalidArgumentException
 {

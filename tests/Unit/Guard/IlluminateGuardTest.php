@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace DSLabs\LaravelRedaktor\Tests\Unit\Guard;
+namespace DSLabs\LaravelApiRedaktor\Tests\Unit\Guard;
 
-use DSLabs\LaravelRedaktor\Guard\IlluminateGuard;
-use DSLabs\LaravelRedaktor\Guard\InvalidArgumentException;
+use DSLabs\LaravelApiRedaktor\Guard\IlluminateGuard;
+use DSLabs\LaravelApiRedaktor\Guard\InvalidArgumentException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;

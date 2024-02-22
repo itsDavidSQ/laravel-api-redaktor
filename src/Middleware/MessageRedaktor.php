@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace DSLabs\LaravelRedaktor\Middleware;
+namespace DSLabs\LaravelApiRedaktor\Middleware;
 
 use Closure;
 use DSLabs\Redaktor\ChiefEditorInterface;

@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace DSLabs\LaravelRedaktor\Tests\Unit\Department;
+namespace DSLabs\LaravelApiRedaktor\Tests\Unit\Department;
 
-use DSLabs\LaravelRedaktor\Department\IlluminateRoutingDepartment;
-use DSLabs\LaravelRedaktor\Department\UnexpectedEditorException;
-use DSLabs\LaravelRedaktor\Editor\IlluminateRoutingEditor;
-use DSLabs\LaravelRedaktor\Tests\Doubles\Department\RoutingEditorProviderStub;
+use DSLabs\LaravelApiRedaktor\Department\IlluminateRoutingDepartment;
+use DSLabs\LaravelApiRedaktor\Department\UnexpectedEditorException;
+use DSLabs\LaravelApiRedaktor\Editor\IlluminateRoutingEditor;
+use DSLabs\LaravelApiRedaktor\Tests\Doubles\Department\RoutingEditorProviderStub;
 use DSLabs\Redaktor\Editor\Brief;
 use DSLabs\Redaktor\Editor\EditorInterface;
 use DSLabs\Redaktor\Editor\RoutingEditorInterface;

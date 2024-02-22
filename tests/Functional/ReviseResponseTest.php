@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace DSLabs\LaravelRedaktor\Tests\Functional;
+namespace DSLabs\LaravelApiRedaktor\Tests\Functional;
 
-use DSLabs\LaravelRedaktor\RedaktorServiceProvider;
-use DSLabs\LaravelRedaktor\Tests\Concerns\InteractsWithApplication;
-use DSLabs\LaravelRedaktor\Tests\Concerns\InteractsWithConfiguration;
-use DSLabs\LaravelRedaktor\Tests\Concerns\InteractsWithRouting;
-use DSLabs\LaravelRedaktor\Tests\Doubles\ResponseRevisionStub;
-use DSLabs\LaravelRedaktor\Tests\Request;
+use DSLabs\LaravelApiRedaktor\ApiRedaktorServiceProvider;
+use DSLabs\LaravelApiRedaktor\Tests\Concerns\InteractsWithApplication;
+use DSLabs\LaravelApiRedaktor\Tests\Concerns\InteractsWithConfiguration;
+use DSLabs\LaravelApiRedaktor\Tests\Concerns\InteractsWithRouting;
+use DSLabs\LaravelApiRedaktor\Tests\Doubles\ResponseRevisionStub;
+use DSLabs\LaravelApiRedaktor\Tests\Request;
 use DSLabs\Redaktor\Revision\ResponseRevision;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Http\Response;
@@ -24,7 +24,7 @@ final class ReviseResponseTest extends TestCase
     public function getServiceProviders(Application $app): array
     {
         return [
-            RedaktorServiceProvider::class,
+            ApiRedaktorServiceProvider::class,
         ];
     }
 
@@ -53,7 +53,7 @@ final class ReviseResponseTest extends TestCase
     {
         // Arrange
         $this->withConfig(
-            'redaktor.revisions',
+            'api-redaktor.revisions',
             [
                 '2020-01' => [
                     self::createResponseRevisionDefinition($revisedResponse = new Response()),
@@ -78,7 +78,7 @@ final class ReviseResponseTest extends TestCase
     {
         // Arrange
         $this->withConfig(
-            'redaktor.revisions',
+            'api-redaktor.revisions',
             [
                 '2020-01' => [
                     self::createResponseRevisionDefinition($revisedResponse = new Response()),

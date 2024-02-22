@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace DSLabs\LaravelRedaktor\Tests\Doubles\Department;
+namespace DSLabs\LaravelApiRedaktor\Tests\Doubles\Department;
 
 use DSLabs\Redaktor\Department\MessageDepartment;
 use DSLabs\Redaktor\Editor\Brief;

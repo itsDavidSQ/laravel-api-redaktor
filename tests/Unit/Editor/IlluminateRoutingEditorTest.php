@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace DSLabs\LaravelRedaktor\Tests\Unit\Editor;
+namespace DSLabs\LaravelApiRedaktor\Tests\Unit\Editor;
 
-use DSLabs\LaravelRedaktor\Editor\IlluminateRoutingEditor;
+use DSLabs\LaravelApiRedaktor\Editor\IlluminateRoutingEditor;
 use DSLabs\Redaktor\Editor\RoutingEditorInterface;
 use DSLabs\Redaktor\Revision\Revision;
 use DSLabs\Redaktor\Version\Version;

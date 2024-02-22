@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace DSLabs\LaravelRedaktor\Tests;
+namespace DSLabs\LaravelApiRedaktor\Tests;
 
 use Illuminate\Http\Request as IlluminateRequest;
 

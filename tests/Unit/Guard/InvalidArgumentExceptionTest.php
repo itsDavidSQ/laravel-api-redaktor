@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace DSLabs\LaravelRedaktor\Tests\Unit\Guard;
+namespace DSLabs\LaravelApiRedaktor\Tests\Unit\Guard;
 
-use DSLabs\LaravelRedaktor\Guard\InvalidArgumentException;
+use DSLabs\LaravelApiRedaktor\Guard\InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 
 /**

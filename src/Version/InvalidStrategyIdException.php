@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace DSLabs\LaravelRedaktor\Version;
+namespace DSLabs\LaravelApiRedaktor\Version;
 
 use DSLabs\Redaktor\Version\Strategy;
 

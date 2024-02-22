@@ -1,6 +1,6 @@
-# Laravel Redaktør
+# Laravel API Redaktør
 
-Laravel Redaktør is a simple yet powerful API versioning library based around the idea of API Evolution. It provides a way to develop your API in a tidy and elegant way while maintaining backwards compatibility.
+Laravel API Redaktør is a simple yet powerful API versioning library based around the idea of API Evolution. It provides a way to develop your API in a tidy and elegant way while maintaining backwards compatibility.
 
 Inspired by [Stripe's API versioning](https://stripe.com/blog/api-versioning) strategy.
 
@@ -34,7 +34,7 @@ Inspired by [Stripe's API versioning](https://stripe.com/blog/api-versioning) st
 
 To install the latest version, simply require it from your CLI:
 ```sh
-  composer require ds-labs/laravel-redaktor
+  composer require ds-labs/laravel-api-redaktor
 ```
 
 Service Provider(s) and/or Facade(s) will be auto discovered.
@@ -43,9 +43,9 @@ Service Provider(s) and/or Facade(s) will be auto discovered.
 
 Publish the configuration file:
 ```sh
-  php artisan vendor:publish --provider="DSLabs\LaravelRedaktor\RedaktorServiceProvider"
+  php artisan vendor:publish --provider="DSLabs\LaravelApiRedaktor\RedaktorServiceProvider"
 ```
-The above command will create a `redaktor.php` file in your `/config` directory.
+The above command will create a `api-redaktor.php` file in your `/config` directory.
 
 ## Quick Start
 
@@ -84,7 +84,7 @@ Assuming there is a `GET /api/users` endpoint that renders a non-paginated list 
         }
     ```
 
-1. Register the revision in the [published config](#Configuration) file (`config/redaktor.php`):
+1. Register the revision in the [published config](#Configuration) file (`config/api-redaktor.php`):
    ```php
       return [
       
@@ -112,19 +112,19 @@ Assuming there is a `GET /api/users` endpoint that renders a non-paginated list 
 
 ### Versioning
 
-API versioning can be implemented using various strategies; all of them with pros and cons. For this reason, Redaktør lets you choose what strategy best suits your needs by providing an implementation for the most commonly used strategies.
+API versioning can be implemented using various strategies; all of them with pros and cons. For this reason, API Redaktør lets you choose what strategy best suits your needs by providing an implementation for the most commonly used strategies.
 
 A strategy is responsible to identify the intended target version. That is, to find out what version of the API the integrator is trying to interact with.
 
-Redaktør does not make any assumptions about your version naming convention; however, it advises to use a date-based version naming approach, where each version name is the date when the revision was implemented/released. I.e.: `2020-10-20`.
+API Redaktør does not make any assumptions about your version naming convention; however, it advises to use a date-based version naming approach, where each version name is the date when the revision was implemented/released. I.e.: `2020-10-20`.
 
-By default, a custom `API-Version` header specifying the target version is expected. This default can be configured by modifying the `strategies` configuration in the published `redaktor.php` configuration file, as shown in the following sections.
+By default, a custom `API-Version` header specifying the target version is expected. This default can be configured by modifying the `strategies` configuration in the published `api-redaktor.php` configuration file, as shown in the following sections.
 
 If no version is defined in the request, or it is defined but does not match an existing one, the latest version is presumed.
 
 #### Custom Header
 
-APIs using a custom header as their versioning strategy may use the `\DSLabs\LaravelRedaktor\Version\CustomHeaderStrategy` strategy.
+APIs using a custom header as their versioning strategy may use the `\DSLabs\LaravelApiRedaktor\Version\CustomHeaderStrategy` strategy.
 
 The Custom Header strategy is configured as the default strategy. It expects an `API-Version` header indicating the version to be used. E.g.:
 ```text
@@ -133,7 +133,7 @@ The Custom Header strategy is configured as the default strategy. It expects an 
    API-Version: 2020-10-20
 ```
 
-If you would like to use a different header name, just modify the value of the `name` property in the `redaktor.php` configuration file:
+If you would like to use a different header name, just modify the value of the `name` property in the `api-redaktor.php` configuration file:
 
 ```php
    return [
@@ -143,7 +143,7 @@ If you would like to use a different header name, just modify the value of the `
         */
        'strategies' => [
            [ 
-               'id' => \DSLabs\LaravelRedaktor\Version\CustomHeaderStrategy::class,
+               'id' => \DSLabs\LaravelApiRedaktor\Version\CustomHeaderStrategy::class,
                'config' => [
                    'name' => 'Version',
                ],
@@ -157,7 +157,7 @@ If you would like to use a different header name, just modify the value of the `
 
 #### URI Path
 
-APIs defining the version in the URI (i.e.: `/api/v1/users`) may use `\DSLabs\LaravelRedaktor\Version\UriPathStrategy` as their versioning strategy.
+APIs defining the version in the URI (i.e.: `/api/v1/users`) may use `\DSLabs\LaravelApiRedaktor\Version\UriPathStrategy` as their versioning strategy.
 
 The URI Path strategy extracts the target version from the `index` position (0-based) of the URI path segments. That is, setting `index` to `1` will return `2020-10-20` as the target version for the following request:
 ```text
@@ -165,7 +165,7 @@ The URI Path strategy extracts the target version from the `index` position (0-b
    Host: example.org
 ```
 
-To use this strategy, override the `strategies` configuration in the `/config/redaktor.php` file:
+To use this strategy, override the `strategies` configuration in the `/config/api-redaktor.php` file:
 
 ```php
    return [
@@ -175,7 +175,7 @@ To use this strategy, override the `strategies` configuration in the `/config/re
         */
        'strategies' => [
            [
-               'id' => \DSLabs\LaravelRedaktor\Version\UriPathStrategy::class,
+               'id' => \DSLabs\LaravelApiRedaktor\Version\UriPathStrategy::class,
                'config' => [
                    'index' => 1,
                ],
@@ -190,9 +190,9 @@ To use this strategy, override the `strategies` configuration in the `/config/re
 #### Query String
 
 APIs accepting the version as a query string parameter, may use the
-`\DSLabs\LaravelRedaktor\Version\QueryStringStrategy` strategy.
+`\DSLabs\LaravelApiRedaktor\Version\QueryStringStrategy` strategy.
 
-The parameter name can be configured by changing the `name` property in the `/config/redaktor.php` configuration file:
+The parameter name can be configured by changing the `name` property in the `/config/api-redaktor.php` configuration file:
 
 ```php
    return [
@@ -202,7 +202,7 @@ The parameter name can be configured by changing the `name` property in the `/co
         */
        'strategies' => [
             [
-               'id' => \DSLabs\LaravelRedaktor\Version\QueryStringStrategy::class,
+               'id' => \DSLabs\LaravelApiRedaktor\Version\QueryStringStrategy::class,
                'config' => [
                   'name' => 'version',
                ],
@@ -221,7 +221,7 @@ This strategy resolves the target version from the database based on an applicat
 A database migration is included out of the box. To make use of it, publish the migration file to your application:
 
 ```sh
-  php artisan vendor:publish --provider="DSLabs\LaravelRedaktor\RedaktorServiceProvider" --tag="migrations"
+  php artisan vendor:publish --provider="DSLabs\LaravelApiRedaktor\RedaktorServiceProvider" --tag="migrations"
 ```
 
 Migrate the database:
@@ -230,7 +230,7 @@ Migrate the database:
   php artisan migrate
 ```
 
-And configure it in the `redaktor.php` config file.
+And configure it in the `api-redaktor.php` config file.
 
  ```php
    return [
@@ -240,7 +240,7 @@ And configure it in the `redaktor.php` config file.
         */
        'strategies' => [
            [
-               'id' => \DSLabs\LaravelRedaktor\Version\DatabaseStrategy::class,
+               'id' => \DSLabs\LaravelApiRedaktor\Version\DatabaseStrategy::class,
            ],
        ],
 
@@ -249,7 +249,7 @@ And configure it in the `redaktor.php` config file.
    ];
 ```
 
-By default, the Database strategy will look up for the value store in the `version` column from the `redaktor` database table where the `app_id` column matches the value specified in the `Application-Id` header. However, you may configure these parameters as demonstrated below:
+By default, the Database strategy will look up for the value store in the `version` column from the `api-redaktor` database table where the `app_id` column matches the value specified in the `Application-Id` header. However, you may configure these parameters as demonstrated below:
 
 ```php
    return [
@@ -259,7 +259,7 @@ By default, the Database strategy will look up for the value store in the `versi
         */
        'strategies' => [
             [
-               'id' => \DSLabs\LaravelRedaktor\Version\DatabaseStrategy::class,
+               'id' => \DSLabs\LaravelApiRedaktor\Version\DatabaseStrategy::class,
                'config' => [
                    'table' => 'versions',
                    'column' => 'pin_version',
@@ -283,7 +283,7 @@ If provided, the `filter` value must be a callable returning an associative arra
 
 If none of the provided implementations suits your API's versioning strategy, you can create your own by implementing the `\DSLabs\Redaktor\Version\Strategy` interface.
 
-To use your custom strategy, set its Full Qualified Class Name (FQCN) or alias as the `id` property in `/config/redaktor.php`; the `config` array will be passed as the `$parameters` argument to the Container's `make()` method, giving you the chance to configure your custom strategy from the config file.
+To use your custom strategy, set its Full Qualified Class Name (FQCN) or alias as the `id` property in `/config/api-redaktor.php`; the `config` array will be passed as the `$parameters` argument to the Container's `make()` method, giving you the chance to configure your custom strategy from the config file.
 
 ### Revisions
 
@@ -498,7 +498,7 @@ A revision definition is simply a string or closure used to define a revision. I
 
 Each new version must be added at the end of the `revisions` array.
 
-To register a version, add a list of revision definitions indexed by its version name to the `revisions` key in `config/redaktor.php` as shown below:
+To register a version, add a list of revision definitions indexed by its version name to the `revisions` key in `config/api-redaktor.php` as shown below:
 ```php
    return [
     
@@ -524,7 +524,7 @@ To register a version, add a list of revision definitions indexed by its version
 
 Sometimes in a revision, you may have the need to target certain route(s). You could do so by naming each of them in your route definition and checking in your revision if the name is the one expected. However, this becomes tedious and brittle when you are targeting a bunch of routes.
 
-To address this, Laravel Redaktør ships with a feature that allows you to tag and check for tags in your routes easily.
+To address this, Laravel API Redaktør ships with a feature that allows you to tag and check for tags in your routes easily.
 
 Tag a route:
 ```php
@@ -577,4 +577,4 @@ Running all tests:
 
 ## License
 
-Laravel Redaktør is an open-source software licensed under the [MIT license](LICENSE.md).
+Laravel API Redaktør is an open-source software licensed under the [MIT license](LICENSE.md).

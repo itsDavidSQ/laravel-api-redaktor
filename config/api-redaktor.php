@@ -9,7 +9,7 @@ return [
      */
     'strategies' => [
         [
-            'id' => \DSLabs\LaravelRedaktor\Version\CustomHeaderStrategy::class,
+            'id' => \DSLabs\LaravelApiRedaktor\Version\CustomHeaderStrategy::class,
             'config' => [
                 'name' => 'API-Version',
             ],

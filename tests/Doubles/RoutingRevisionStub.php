@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace DSLabs\LaravelRedaktor\Tests\Doubles;
+namespace DSLabs\LaravelApiRedaktor\Tests\Doubles;
 
 use DSLabs\Redaktor\Revision\RoutingRevision;
 

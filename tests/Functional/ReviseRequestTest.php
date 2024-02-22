@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace DSLabs\LaravelRedaktor\Tests\Functional;
+namespace DSLabs\LaravelApiRedaktor\Tests\Functional;
 
-use DSLabs\LaravelRedaktor\RedaktorServiceProvider;
-use DSLabs\LaravelRedaktor\Tests\Concerns\InteractsWithApplication;
-use DSLabs\LaravelRedaktor\Tests\Concerns\InteractsWithConfiguration;
-use DSLabs\LaravelRedaktor\Tests\Concerns\InteractsWithRouting;
-use DSLabs\LaravelRedaktor\Tests\Doubles\RequestRevisionStub;
-use DSLabs\LaravelRedaktor\Tests\Request;
+use DSLabs\LaravelApiRedaktor\ApiRedaktorServiceProvider;
+use DSLabs\LaravelApiRedaktor\Tests\Concerns\InteractsWithApplication;
+use DSLabs\LaravelApiRedaktor\Tests\Concerns\InteractsWithConfiguration;
+use DSLabs\LaravelApiRedaktor\Tests\Concerns\InteractsWithRouting;
+use DSLabs\LaravelApiRedaktor\Tests\Doubles\RequestRevisionStub;
+use DSLabs\LaravelApiRedaktor\Tests\Request;
 use DSLabs\Redaktor\Revision\RequestRevision;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Foundation\Testing\Concerns\InteractsWithExceptionHandling;
@@ -27,7 +27,7 @@ final class ReviseRequestTest extends TestCase
     protected function getServiceProviders(Application $app): array
     {
         return [
-            RedaktorServiceProvider::class,
+            ApiRedaktorServiceProvider::class,
         ];
     }
 
@@ -56,7 +56,7 @@ final class ReviseRequestTest extends TestCase
         // Arrange
         $this->withoutExceptionHandling();
         $this->withConfig(
-            'redaktor.revisions',
+            'api-redaktor.revisions',
             [
                 '2020-01' => [
                     self::createRequestRevisionDefinition($revisedRequest = Request::create('/foo')),
@@ -84,7 +84,7 @@ final class ReviseRequestTest extends TestCase
         // Arrange
         $this->withoutExceptionHandling();
         $this->withConfig(
-            'redaktor.revisions',
+            'api-redaktor.revisions',
             [
                 '2020-01' => [
                     self::createRequestRevisionDefinition(Request::create('/baz')),
@@ -113,7 +113,7 @@ final class ReviseRequestTest extends TestCase
         // Arrange
         $this->withoutExceptionHandling();
         $this->withConfig(
-            'redaktor.revisions',
+            'api-redaktor.revisions',
             [
                 '2020-01' => [
                     $revisionName = 'foo-revision',

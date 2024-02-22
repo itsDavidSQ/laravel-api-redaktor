@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace DSLabs\LaravelRedaktor;
+namespace DSLabs\LaravelApiRedaktor;
 
-use DSLabs\LaravelRedaktor\Department\IlluminateMessageDepartment;
-use DSLabs\LaravelRedaktor\Department\IlluminateRoutingDepartment;
-use DSLabs\LaravelRedaktor\Middleware\MessageRedaktor;
-use DSLabs\LaravelRedaktor\Middleware\RoutingRedaktor;
-use DSLabs\LaravelRedaktor\Version\DatabaseStrategy;
-use DSLabs\LaravelRedaktor\Version\InvalidStrategyIdException;
+use DSLabs\LaravelApiRedaktor\Department\IlluminateMessageDepartment;
+use DSLabs\LaravelApiRedaktor\Department\IlluminateRoutingDepartment;
+use DSLabs\LaravelApiRedaktor\Middleware\MessageRedaktor;
+use DSLabs\LaravelApiRedaktor\Middleware\RoutingRedaktor;
+use DSLabs\LaravelApiRedaktor\Version\DatabaseStrategy;
+use DSLabs\LaravelApiRedaktor\Version\InvalidStrategyIdException;
 use DSLabs\Redaktor\ChiefEditor;
 use DSLabs\Redaktor\ChiefEditorInterface;
 use DSLabs\Redaktor\Department\GenericMessageDepartment;
@@ -28,9 +28,9 @@ use Illuminate\Contracts\Http\Kernel;
 use Illuminate\Database\Query\Builder;
 use Illuminate\Support\ServiceProvider;
 
-final class RedaktorServiceProvider extends ServiceProvider
+final class ApiRedaktorServiceProvider extends ServiceProvider
 {
-    private const SOURCE_CONFIG_PATH = __DIR__ . '/../config/redaktor.php';
+    private const SOURCE_CONFIG_PATH = __DIR__ . '/../config/api-redaktor.php';
 
     public function register(): void
     {
@@ -49,12 +49,12 @@ final class RedaktorServiceProvider extends ServiceProvider
 
     private function setupConfiguration(): void
     {
-        $this->mergeConfigFrom(self::SOURCE_CONFIG_PATH, 'redaktor');
+        $this->mergeConfigFrom(self::SOURCE_CONFIG_PATH, 'api-redaktor');
 
         if ($this->app->runningInConsole()) {
             $this->publishes(
                 [
-                    self::SOURCE_CONFIG_PATH => $this->app->configPath('redaktor.php'),
+                    self::SOURCE_CONFIG_PATH => $this->app->configPath('api-redaktor.php'),
                 ],
                 'config'
             );
@@ -64,13 +64,13 @@ final class RedaktorServiceProvider extends ServiceProvider
     private function setupMigrations(): void
     {
         if ($this->app->runningInConsole()) {
-            $migrationBaseFileName = 'create_redaktor_table.php';
+            $migrationBaseFileName = 'create_api_redaktor_table.php';
             $migrationsPath = $this->app->databasePath('migrations');
             if (self::doesMigrationExist($migrationsPath, $migrationBaseFileName)) {
                 $datePrefix = date('Y_m_d_His');
                 $this->publishes(
                     [
-                        __DIR__ . '/../migrations/create_redaktor_table.php.stub' =>
+                        __DIR__ . '/../migrations/create_api_redaktor_table.php.stub' =>
                             "{$migrationsPath}/{$datePrefix}_{$migrationBaseFileName}",
                     ],
                     'migrations'
@@ -84,7 +84,7 @@ final class RedaktorServiceProvider extends ServiceProvider
         $this->app->singleton(
             VersionResolver::class,
             static function (Container $container): VersionResolver {
-                $strategiesConfig = $container->get('config')->get('redaktor.strategies');
+                $strategiesConfig = $container->get('config')->get('api-redaktor.strategies');
 
                 $strategies = array_map(
                     static function (array $strategyConfig) use ($container) {
@@ -138,7 +138,7 @@ final class RedaktorServiceProvider extends ServiceProvider
     private function setupRevisionsRegistry(): void
     {
         $this->app->singleton(InMemoryRegistry::class, static function (Container $container) {
-            $revisions = $container->get('config')->get('redaktor.revisions');
+            $revisions = $container->get('config')->get('api-redaktor.revisions');
 
             return new InMemoryRegistry($revisions);
         });

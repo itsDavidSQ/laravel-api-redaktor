@@ -2,18 +2,18 @@
 
 declare(strict_types=1);
 
-namespace DSLabs\LaravelRedaktor\Tests\Integration;
+namespace DSLabs\LaravelApiRedaktor\Tests\Integration;
 
-use DSLabs\LaravelRedaktor\RedaktorServiceProvider;
-use DSLabs\LaravelRedaktor\Tests\Concerns\InteractsWithApplication;
-use DSLabs\LaravelRedaktor\Tests\Concerns\InteractsWithConfiguration;
-use DSLabs\LaravelRedaktor\Tests\Concerns\InteractsWithDatabase;
-use DSLabs\LaravelRedaktor\Tests\Doubles\DummyStrategy;
-use DSLabs\LaravelRedaktor\Version\CustomHeaderStrategy;
-use DSLabs\LaravelRedaktor\Version\DatabaseStrategy;
-use DSLabs\LaravelRedaktor\Version\InvalidStrategyIdException;
-use DSLabs\LaravelRedaktor\Version\QueryStringStrategy;
-use DSLabs\LaravelRedaktor\Version\UriPathStrategy;
+use DSLabs\LaravelApiRedaktor\ApiRedaktorServiceProvider;
+use DSLabs\LaravelApiRedaktor\Tests\Concerns\InteractsWithApplication;
+use DSLabs\LaravelApiRedaktor\Tests\Concerns\InteractsWithConfiguration;
+use DSLabs\LaravelApiRedaktor\Tests\Concerns\InteractsWithDatabase;
+use DSLabs\LaravelApiRedaktor\Tests\Doubles\DummyStrategy;
+use DSLabs\LaravelApiRedaktor\Version\CustomHeaderStrategy;
+use DSLabs\LaravelApiRedaktor\Version\DatabaseStrategy;
+use DSLabs\LaravelApiRedaktor\Version\InvalidStrategyIdException;
+use DSLabs\LaravelApiRedaktor\Version\QueryStringStrategy;
+use DSLabs\LaravelApiRedaktor\Version\UriPathStrategy;
 use DSLabs\Redaktor\ChiefEditorInterface;
 use DSLabs\Redaktor\Registry\InMemoryRegistry;
 use DSLabs\Redaktor\Registry\Registry;
@@ -24,9 +24,9 @@ use Illuminate\Support\Facades\Artisan;
 use PHPUnit\Framework\TestCase;
 
 /**
- * @see RedaktorServiceProvider
+ * @see ApiRedaktorServiceProvider
  */
-final class RedaktorServiceProviderTest extends TestCase
+final class ApiRedaktorServiceProviderTest extends TestCase
 {
     use InteractsWithApplication;
     use InteractsWithConfiguration;
@@ -49,7 +49,7 @@ final class RedaktorServiceProviderTest extends TestCase
     public function testDefaultsToAnEmptyRevisionsList(): void
     {
         // Act
-        $revisions = $this->app->get('config')->get('redaktor.revisions');
+        $revisions = $this->app->get('config')->get('api-redaktor.revisions');
 
         // Assert
         self::assertSame([], $revisions);
@@ -59,7 +59,7 @@ final class RedaktorServiceProviderTest extends TestCase
     {
         // Arrange
         $this->withConfig([
-            'redaktor.strategies' => [
+            'api-redaktor.strategies' => [
                 [
                     'id' => 'foo',
                     'config' => [],
@@ -78,7 +78,7 @@ final class RedaktorServiceProviderTest extends TestCase
     {
         // Arrange
         $this->withConfig([
-            'redaktor.strategies' => [
+            'api-redaktor.strategies' => [
                 [
                     'id' => get_class(new class () {}),
                 ],
@@ -110,7 +110,7 @@ final class RedaktorServiceProviderTest extends TestCase
     {
         // Arrange
         $this->withConfig([
-            'redaktor.strategies' => [
+            'api-redaktor.strategies' => [
                 [
                     'id' => CustomHeaderStrategy::class,
                     'config' => [
@@ -135,7 +135,7 @@ final class RedaktorServiceProviderTest extends TestCase
     {
         // Arrange
         $this->withConfig([
-            'redaktor.strategies' => [
+            'api-redaktor.strategies' => [
                 [
                     'id' => QueryStringStrategy::class,
                     'config' => [
@@ -161,7 +161,7 @@ final class RedaktorServiceProviderTest extends TestCase
     {
         // Arrange
         $this->withConfig([
-            'redaktor.strategies' => [
+            'api-redaktor.strategies' => [
                 [
                     'id' => UriPathStrategy::class,
                     'config' => [
@@ -186,17 +186,17 @@ final class RedaktorServiceProviderTest extends TestCase
         // Arrange
         Artisan::call(
             'vendor:publish',
-            ['--provider' => RedaktorServiceProvider::class]
+            ['--provider' => ApiRedaktorServiceProvider::class]
         );
         Artisan::call('migrate');
 
-        $this->insertInto('redaktor', [
+        $this->insertInto('api_redaktor', [
             'version' => $expectedVersion = 'foo',
             'app_id' => $appId = 'bar',
         ]);
 
         $this->withConfig(
-            'redaktor.strategies',
+            'api-redaktor.strategies',
             [
                 [
                     'id' => DatabaseStrategy::class,
@@ -221,7 +221,7 @@ final class RedaktorServiceProviderTest extends TestCase
     {
         // Arrange
         $this->withConfig([
-            'redaktor.strategies' => [
+            'api-redaktor.strategies' => [
                 [
                     'id' => DummyStrategy::class,
                 ],
@@ -236,29 +236,29 @@ final class RedaktorServiceProviderTest extends TestCase
     public function testPublishesConfig(): void
     {
         // Arrange
-        $publishedConfigFilePath = $this->app->configPath('redaktor.php');
+        $publishedConfigFilePath = $this->app->configPath('api-redaktor.php');
 
         // Act
         Artisan::call('vendor:publish', [
-            '--provider' => RedaktorServiceProvider::class,
+            '--provider' => ApiRedaktorServiceProvider::class,
             '--tag' => 'config',
         ]);
 
         // Assert
-        self::assertFileEquals(__DIR__ . '/../../config/redaktor.php', $publishedConfigFilePath);
+        self::assertFileEquals(__DIR__ . '/../../config/api-redaktor.php', $publishedConfigFilePath);
     }
 
     public function testPublishesMigrations(): void
     {
         // Act
         Artisan::call('vendor:publish', [
-            '--provider' => RedaktorServiceProvider::class,
+            '--provider' => ApiRedaktorServiceProvider::class,
             '--tag' => 'migrations',
         ]);
 
         // Assert
         $migrationsPath = $this->getApplication()->databasePath('migrations');
-        self::assertCount(1, glob("$migrationsPath/*_create_redaktor_table.php"));
+        self::assertCount(1, glob("$migrationsPath/*_create_api_redaktor_table.php"));
     }
 
     public function testBindsInMemoryRegistryToEmptyRevisionsRegistryByDefault(): void
@@ -283,7 +283,7 @@ final class RedaktorServiceProviderTest extends TestCase
     {
         // Arrange
         $this->withConfig([
-            'redaktor.revisions' => [
+            'api-redaktor.revisions' => [
                 'foo' => [
                     static function () {},
                     static function () {},
@@ -320,7 +320,7 @@ final class RedaktorServiceProviderTest extends TestCase
     protected function getServiceProviders(Application $app): array
     {
         return [
-            RedaktorServiceProvider::class,
+            ApiRedaktorServiceProvider::class,
         ];
     }
 }

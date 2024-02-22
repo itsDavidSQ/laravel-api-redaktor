@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace DSLabs\LaravelRedaktor\Tests\Integration\Version;
+namespace DSLabs\LaravelApiRedaktor\Tests\Integration\Version;
 
-use DSLabs\LaravelRedaktor\Guard\InvalidArgumentException;
-use DSLabs\LaravelRedaktor\RedaktorServiceProvider;
-use DSLabs\LaravelRedaktor\Tests\Concerns\InteractsWithApplication;
-use DSLabs\LaravelRedaktor\Tests\Concerns\InteractsWithDatabase;
-use DSLabs\LaravelRedaktor\Version\DatabaseStrategy;
+use DSLabs\LaravelApiRedaktor\Guard\InvalidArgumentException;
+use DSLabs\LaravelApiRedaktor\ApiRedaktorServiceProvider;
+use DSLabs\LaravelApiRedaktor\Tests\Concerns\InteractsWithApplication;
+use DSLabs\LaravelApiRedaktor\Tests\Concerns\InteractsWithDatabase;
+use DSLabs\LaravelApiRedaktor\Version\DatabaseStrategy;
 use DSLabs\Redaktor\Version\UnresolvedVersionException;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Database\Schema\Blueprint;
@@ -55,7 +55,7 @@ final class DatabaseStrategyTest extends TestCase
     public function testThrowAnUnresolvedVersionExceptionIfNoIdentifierSent(): void
     {
         // Arrange
-        Schema::create('redaktor', static function (Blueprint $table): void {
+        Schema::create('api_redaktor', static function (Blueprint $table): void {
             $table->string('app_id')->nullable(false)->unique();
             $table->string('version')->nullable(false);
         });
@@ -74,7 +74,7 @@ final class DatabaseStrategyTest extends TestCase
     public function testThrowAnUnresolvedVersionExceptionIfNoIdentifierMatched(): void
     {
         // Arrange
-        Schema::create('redaktor', static function (Blueprint $table): void {
+        Schema::create('api_redaktor', static function (Blueprint $table): void {
             $table->string('app_id')->nullable(false)->unique();
             $table->string('version')->nullable(false);
         });
@@ -95,12 +95,12 @@ final class DatabaseStrategyTest extends TestCase
     public function testFetchVersionUsingDefaultValues(): void
     {
         // Arrange
-        Schema::create('redaktor', static function (Blueprint $table): void {
+        Schema::create('api_redaktor', static function (Blueprint $table): void {
             $table->string('app_id')->nullable(false)->unique();
             $table->string('version')->nullable(false);
         });
         $this->insertInto(
-            'redaktor',
+            'api_redaktor',
             [
                 'version' => $expectedVersion = 'foo',
                 'app_id' => $appId = 'bar',
@@ -155,12 +155,12 @@ final class DatabaseStrategyTest extends TestCase
     {
         // Arrange
         $appIdColumn = 'foo';
-        Schema::create('redaktor', static function (Blueprint $table) use ($appIdColumn): void {
+        Schema::create('api_redaktor', static function (Blueprint $table) use ($appIdColumn): void {
             $table->string($appIdColumn)->nullable(false)->unique();
             $table->string('version')->nullable(false);
         });
         $this->insertInto(
-            'redaktor',
+            'api_redaktor',
             [
                 'version' => $expectedVersion = 'bar',
                 $appIdColumn => $appId = 'baz',
@@ -168,7 +168,7 @@ final class DatabaseStrategyTest extends TestCase
         );
 
         $strategy = new DatabaseStrategy(
-            'redaktor',
+            'api_redaktor',
             'version',
             static function () use ($appIdColumn, $appId): array {
                 return [
@@ -190,7 +190,7 @@ final class DatabaseStrategyTest extends TestCase
     protected function getServiceProviders(Application $app): array
     {
         return [
-            RedaktorServiceProvider::class,
+            ApiRedaktorServiceProvider::class,
         ];
     }
 }

@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace DSLabs\LaravelRedaktor\Tests\Unit\Editor;
+namespace DSLabs\LaravelApiRedaktor\Tests\Unit\Editor;
 
-use DSLabs\LaravelRedaktor\Editor\IlluminateMessageEditor;
+use DSLabs\LaravelApiRedaktor\Editor\IlluminateMessageEditor;
 use DSLabs\Redaktor\Editor\MessageEditorInterface;
 use DSLabs\Redaktor\Revision\Revision;
 use DSLabs\Redaktor\Version\Version;

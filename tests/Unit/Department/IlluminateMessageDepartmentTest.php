@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace DSLabs\LaravelRedaktor\Tests\Unit\Department;
+namespace DSLabs\LaravelApiRedaktor\Tests\Unit\Department;
 
-use DSLabs\LaravelRedaktor\Department\IlluminateMessageDepartment;
-use DSLabs\LaravelRedaktor\Department\UnexpectedEditorException;
-use DSLabs\LaravelRedaktor\Editor\IlluminateMessageEditor;
-use DSLabs\LaravelRedaktor\Tests\Doubles\Department\MessageEditorProviderStub;
+use DSLabs\LaravelApiRedaktor\Department\IlluminateMessageDepartment;
+use DSLabs\LaravelApiRedaktor\Department\UnexpectedEditorException;
+use DSLabs\LaravelApiRedaktor\Editor\IlluminateMessageEditor;
+use DSLabs\LaravelApiRedaktor\Tests\Doubles\Department\MessageEditorProviderStub;
 use DSLabs\Redaktor\Editor\Brief;
 use DSLabs\Redaktor\Editor\EditorInterface;
 use DSLabs\Redaktor\Editor\MessageEditorInterface;
