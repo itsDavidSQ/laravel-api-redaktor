@@ -4,8 +4,11 @@ declare(strict_types=1);
 
 namespace DSLabs\LaravelRedaktor\Tests\Concerns;
 
+use Illuminate\Contracts\Console\Kernel as ConsoleKernelContract;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\Http\Kernel;
+use Illuminate\Filesystem\Filesystem;
+use Illuminate\Foundation\PackageManifest;
 use Illuminate\Http\Request;
 use PHPUnit\Framework\TestCase;
 
@@ -22,7 +25,7 @@ trait InteractsWithApplication
     abstract protected function getServiceProviders(Application $app): array;
 
     /**
-     * Setup the application and assign it to a class property so it can be
+     * Set up the application and assign it to a class property, so it can be
      * accessed from other concerns and the test itself.
      */
     protected function setUp(): void
@@ -36,12 +39,21 @@ trait InteractsWithApplication
     }
 
     /**
-     * Clean up so next test runs.
+     * Clean up so next test runs in a clean environment.
      */
     protected function tearDown(): void
     {
+        if ($this instanceof TestCase) {
+            parent::tearDown();
+        }
+
         if ($this->app instanceof Application) {
             ResourcePublisher::revert();
+
+            // Clear cache
+            $artisan = $this->app->make(ConsoleKernelContract::class);
+            $artisan->call('optimize:clear');
+            $artisan->call('clear-compiled');
 
             $this->app->flush();
         }
@@ -71,6 +83,7 @@ trait InteractsWithApplication
     {
         /** @var Application $app */
         $app = require __DIR__ . '/../../vendor/laravel/laravel/bootstrap/app.php';
+        $this->redefinePackageManifest($app);
 
         $app->instance('request', new Request());
         $app->make(Kernel::class)->bootstrap();
@@ -80,5 +93,24 @@ trait InteractsWithApplication
         }
 
         return $app;
+    }
+
+    /**
+     * Redefine the `PackageManifest` service to use the project root path as the base path,
+     * instead of the default laravel/laravel path inside the vendor directory.
+     * `PackageManifest` uses the base path to look for the `composer.json` file to identify
+     * any Service Providers defined by composer packages.
+     */
+    private function redefinePackageManifest(Application $app): void
+    {
+        $app->singleton(PackageManifest::class, function (Application $app) {
+            $projectRootPath = __DIR__ . '/../../';
+
+            return new PackageManifest(
+                new Filesystem,
+                $projectRootPath,
+                $app->getCachedPackagesPath()
+            );
+        });
     }
 }

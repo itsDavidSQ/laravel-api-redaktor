@@ -20,14 +20,14 @@
         }
     ],
     "require": {
-        "php": "^7.3|^8",
-        "ds-labs/redaktor": "^0.1",
-        "illuminate/http": "^6|^7|^8",
-        "illuminate/routing": "^6|^7|^8",
-        "illuminate/support": "^6|^7|^8"
+        "php": "^8.1",
+        "ds-labs/api-redaktor": "^0.1",
+        "illuminate/http": "^9|^10",
+        "illuminate/routing": "^9|^10",
+        "illuminate/support": "^9|^10"
     },
     "require-dev": {
-        "laravel/laravel": "^6|^7|^8",
+        "laravel/laravel": "^9|^10",
         "phpspec/prophecy-phpunit": "^2.0",
         "phpunit/phpunit": "^9"
     },
@@ -58,7 +58,7 @@
     "repositories": [
         {
             "type": "vcs",
-            "url": "git@github.com:ds-labs/redaktor.git"
+            "url": "git@github.com:ds-labs/api-redaktor.git"
         }
     ]
 }
