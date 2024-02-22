@@ -31,6 +31,9 @@
         "phpspec/prophecy-phpunit": "^2.0",
         "phpunit/phpunit": "^9"
     },
+    "conflict": {
+        "nesbot/carbon": "<2.62.1"
+    },
     "autoload": {
         "psr-4": {
             "DSLabs\\LaravelRedaktor\\": "src/"
