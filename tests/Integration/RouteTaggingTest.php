@@ -215,13 +215,13 @@ final class RouteTaggingTest extends TestCase
             'Float' => [2.34],
             'Boolean' => [true],
             'Object' => [new \stdClass()],
-            'Closure' => [static function () { }],
+            'Closure' => [static function () {}],
             'Null array' => [[null]],
             'Integer array' => [[1]],
             'Float array' => [[2.34]],
             'Boolean array' => [[true]],
             'Object array' => [[new \stdClass()]],
-            'Closure array' => [[static function () { }]],
+            'Closure array' => [[static function () {}]],
         ];
     }
 
@@ -240,7 +240,7 @@ final class DummyRoute extends Route
         parent::__construct(
             'GET',
             '/foo',
-            static function () { }
+            static function () {}
         );
     }
 }

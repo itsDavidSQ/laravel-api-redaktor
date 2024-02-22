@@ -21,7 +21,7 @@ final class CustomHeaderStrategyTest extends TestCase
         $version = (new CustomHeaderStrategy('Foo'))->resolve(new Request());
 
         //Assert
-        self::assertSame('', (string)$version);
+        self::assertSame('', (string) $version);
     }
 
     public function testRetrievesRevisionName(): void
@@ -34,7 +34,7 @@ final class CustomHeaderStrategyTest extends TestCase
         $version = (new CustomHeaderStrategy('Foo'))->resolve($request);
 
         // Assert
-        self::assertSame('bar', (string)$version);
+        self::assertSame('bar', (string) $version);
     }
 
     public function testThrowsAnExceptionIfTheArgumentIsNotAnIlluminateRequest(): void

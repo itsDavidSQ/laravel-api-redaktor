@@ -118,7 +118,7 @@ final class DatabaseStrategyTest extends TestCase
         $version = $strategy->resolve($request);
 
         // Assert
-        self::assertSame($expectedVersion, (string)$version);
+        self::assertSame($expectedVersion, (string) $version);
     }
 
     public function testFetchVersionFromCustomColumnAndTable(): void
@@ -148,7 +148,7 @@ final class DatabaseStrategyTest extends TestCase
         $version = $strategy->resolve($request);
 
         // Assert
-        self::assertSame($expectedVersion, (string)$version);
+        self::assertSame($expectedVersion, (string) $version);
     }
 
     public function testFetchVersionUsingCustomFilterDefinedAtInstantiation(): void
@@ -184,7 +184,7 @@ final class DatabaseStrategyTest extends TestCase
         $version = $strategy->resolve(Request::create('/'));
 
         // Assert
-        self::assertSame($expectedVersion, (string)$version);
+        self::assertSame($expectedVersion, (string) $version);
     }
 
     protected function getServiceProviders(Application $app): array

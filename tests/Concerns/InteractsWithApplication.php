@@ -107,7 +107,7 @@ trait InteractsWithApplication
             $projectRootPath = __DIR__ . '/../../';
 
             return new PackageManifest(
-                new Filesystem,
+                new Filesystem(),
                 $projectRootPath,
                 $app->getCachedPackagesPath()
             );

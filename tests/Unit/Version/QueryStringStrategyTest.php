@@ -21,7 +21,7 @@ final class QueryStringStrategyTest extends TestCase
         $version = (new QueryStringStrategy('foo'))->resolve(new Request());
 
         //Assert
-        self::assertSame('', (string)$version);
+        self::assertSame('', (string) $version);
     }
 
     public function testRetrievesRevisionName(): void
@@ -33,7 +33,7 @@ final class QueryStringStrategyTest extends TestCase
         $version = (new QueryStringStrategy('foo'))->resolve($request);
 
         // Assert
-        self::assertSame('bar', (string)$version);
+        self::assertSame('bar', (string) $version);
     }
 
     public function testThrowsAnExceptionIfTheArgumentIsNotAnIlluminateRequest(): void

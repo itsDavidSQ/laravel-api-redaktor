@@ -17,9 +17,7 @@ final class IlluminateGuard
     /**
      * Prevent instantiation.
      */
-    private function __construct()
-    {
-    }
+    private function __construct() {}
 
     /**
      * Ensures the parameter is an instance of \Illuminate\Routing\RouteCollection.

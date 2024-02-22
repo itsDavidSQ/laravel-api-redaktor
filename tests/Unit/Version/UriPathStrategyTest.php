@@ -22,7 +22,7 @@ final class UriPathStrategyTest extends TestCase
         $version = (new UriPathStrategy(0))->resolve($request);
 
         //Assert
-        self::assertSame('', (string)$version);
+        self::assertSame('', (string) $version);
     }
 
     public function testRetrievesRevisionName(): void
@@ -34,7 +34,7 @@ final class UriPathStrategyTest extends TestCase
         $version = (new UriPathStrategy(0))->resolve($request);
 
         // Assert
-        self::assertSame('v1', (string)$version);
+        self::assertSame('v1', (string) $version);
     }
 
     public function testThrowsAnExceptionIfTheArgumentIsNotAnIlluminateRequest(): void

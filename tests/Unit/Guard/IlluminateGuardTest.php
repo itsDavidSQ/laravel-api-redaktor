@@ -128,7 +128,7 @@ final class IlluminateGuardTest extends TestCase
             'string' => ['foo', 'string'],
             'array' => [[], 'array'],
             \stdClass::class => [new \stdClass(), \stdClass::class],
-            'Closure' => [static function () { }, 'Closure'],
+            'Closure' => [static function () {}, 'Closure'],
         ];
     }
 }

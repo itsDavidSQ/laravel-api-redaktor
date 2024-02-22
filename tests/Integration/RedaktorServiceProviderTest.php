@@ -43,7 +43,7 @@ final class RedaktorServiceProviderTest extends TestCase
             ->resolve($request);
 
         // Assert
-        self::assertSame('foo', (string)$version);
+        self::assertSame('foo', (string) $version);
     }
 
     public function testDefaultsToAnEmptyRevisionsList(): void
@@ -80,8 +80,7 @@ final class RedaktorServiceProviderTest extends TestCase
         $this->withConfig([
             'redaktor.strategies' => [
                 [
-                    'id' => get_class(new class() {
-                    }),
+                    'id' => get_class(new class () {}),
                 ],
             ],
         ]);
@@ -104,7 +103,7 @@ final class RedaktorServiceProviderTest extends TestCase
             ->resolve($request);
 
         // Assert
-        self::assertSame('foo', (string)$version);
+        self::assertSame('foo', (string) $version);
     }
 
     public function testRetrievesRevisionNameUsingCustomHeaderStrategy(): void
@@ -129,7 +128,7 @@ final class RedaktorServiceProviderTest extends TestCase
             ->resolve($request);
 
         // Assert
-        self::assertSame('foo', (string)$version);
+        self::assertSame('foo', (string) $version);
     }
 
     public function testRetrievesRevisionNameUsingQueryStringStrategy(): void
@@ -155,7 +154,7 @@ final class RedaktorServiceProviderTest extends TestCase
             ->resolve($request);
 
         // Assert
-        self::assertSame('bar', (string)$version);
+        self::assertSame('bar', (string) $version);
     }
 
     public function testRetrievesRevisionNameUsingUriPathStrategy(): void
@@ -179,7 +178,7 @@ final class RedaktorServiceProviderTest extends TestCase
             ->resolve($request);
 
         // Assert
-        self::assertSame('foo', (string)$version);
+        self::assertSame('foo', (string) $version);
     }
 
     public function testSetsUpDatabaseStrategy(): void
@@ -212,7 +211,7 @@ final class RedaktorServiceProviderTest extends TestCase
             ->resolve($request);
 
         // Assert
-        self::assertSame($expectedVersion, (string)$version);
+        self::assertSame($expectedVersion, (string) $version);
     }
 
     /**
@@ -286,8 +285,8 @@ final class RedaktorServiceProviderTest extends TestCase
         $this->withConfig([
             'redaktor.revisions' => [
                 'foo' => [
-                    static function () { },
-                    static function () { },
+                    static function () {},
+                    static function () {},
                 ],
             ],
         ]);

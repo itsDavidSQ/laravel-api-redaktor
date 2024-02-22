@@ -5,11 +5,10 @@ $finder = PhpCsFixer\Finder::create()
     ->notPath('vendor')
     ->name('*.php')
     ->ignoreVCS(true)
-    ;
+;
+$rules = require __DIR__ . '/.php-cs-fixer.rules.php';
 
-$rules = require __DIR__ . '/.php_cs.rules.php';
-
-return PhpCsFixer\Config::create()
+return (new PhpCsFixer\Config())
     ->setRules($rules)
     ->setRiskyAllowed(true)
     ->setFinder($finder)

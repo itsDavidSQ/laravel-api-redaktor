@@ -33,7 +33,6 @@ jobs:
         with:
           php-version: ${{ matrix.php }}
           coverage: none
-          tools: php-cs-fixer
 
       - name: Cache Composer dependencies
         uses: actions/cache@v4
